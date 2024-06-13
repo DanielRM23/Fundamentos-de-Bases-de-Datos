@@ -1,3 +1,8 @@
+# Fundamentos de Bases de Datos - Semestre 2024-2
+
+Este repositorio contiene el material del curso Fundamentos de Bases de Datos correspondiente al semestre 2024-2. 
+Este repositorio contiene una variedad de prácticas, ejercicios, tareas y un proyecto final, todos relacionados con el estudio y aplicación de bases de datos, abarcando desde la teoría hasta la implementación de código.
+
 ## CasoDeUso.pdf
 Este archivo contiene el caso de uso general del proyecto, con el cual se desarrollaron las prácticas del curso.
 
