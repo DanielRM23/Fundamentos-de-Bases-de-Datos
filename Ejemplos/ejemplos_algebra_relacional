@@ -1,0 +1,57 @@
+σ ciudad = 'CACERES' articulos 
+
+
+2. Obtener todos los valores de P# para los proveedores que abastecen el artículo T1. 
+
+	π P# (σ (t# = 'T1') ENVIOS )  
+
+
+3. Obtener  la  lista  de  pares  de  atributos  (COLOR,  CIUDAD)  de  la  tabla  componentes eliminando los pares duplicados. 
+
+	π color, ciudad COMPONENTES
+	
+	Recordatorio = El operador π quita los renglones repetidos
+
+	
+4. Obtener  de  la  tabla  de  artículos  los  valores  de  T#  y  CIUDAD  donde  el  nombre  de  la ciudad acaba en D o contiene al menos una E. 
+
+	π T#, ciudad (σ (ciudad like '%D') or (ciudad like '%E%') )
+
+	
+5. Obtener los valores de TNOMBRE en orden alfabético para los artículos abastecidos por el proveedor P1
+
+	π TNOMBRE ( (σ (P# = 'P1') ENVIOS ) join ARTICULOS )
+
+	
+6. Obtener los valores de C# para los componentes suministrados para cualquier artículo de MADRID
+
+	π C# ( σ ciudad = 'MADRID' COMPONENTES ) 
+	
+7.  Obtener los valores de P# para los proveedores que suministren los artículos T1 y T2. 
+	π P# (σ T# = 'T1' and T# = 'T2' ENVIOS)
+	
+	Otra opción: 
+	π P# (σ T# = 'T1' ENVIOS) interseccion π P# (σ T# = 'T2' ENVIOS)
+	
+8.  Obtener los valores de P# para los proveedores que suministran para SEVILLA o MADRID un componente ROJO
+
+	π P# [ (π C# (σ color = 'ROJO' COMPONENTES) interseccion π C# (σ ciudad = 'SEVILLA' or ciudad = 'MADRID') ) join ENVIOS ] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

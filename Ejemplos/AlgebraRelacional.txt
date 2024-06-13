@@ -1,0 +1,64 @@
+-- E J E M P L O S   P R E V I O S
+
+-- Obtener toda la información de los clientes que viven en CHIAPAS
+-- Respuesta: Se utiliza el operador de selección para elegir el estado CHIAPAS
+-- σ estado = 'CHIAPAS' cliente 
+
+-- Toda la información de los clientes del banco
+-- Respuesta: Solo se proyecta la tabla cliente y se obtiene toda la info. 
+-- cliente
+
+-- Obtener toda la información de los clientes que viven en CHIAPAS o en OAXACA
+-- σ (estado = 'CHIAPAS' ∨ estado = 'OAXACA') cliente
+
+-- Obtener el nombre, estado y fecha de nacimiento de los clientes que viven en CHIAPAS o en OAXACA
+-- r = σ (estado = 'CHIAPAS' ∨ estado = 'OAXACA') cliente
+-- π nombrecliente, estado, nacimiento r
+
+
+-- E J E M P L O S
+-- Se trabajaron éstos en clase
+
+
+-- EJERCICIO 1. Encontrar la información de todos los prestamos realizados en las sucursales PINOTEPA o HUATULCO.
+
+-- Solución 1
+-- s = sucursal ⨝ prestamo
+-- r = σ(nombresucursal = 'PINOTEPA' ∨ nombresucursal = 'HUATULCO') s
+-- r
+
+-- Solución 2
+-- σ nombresucursal = 'PINOTEPA' ∨ nombresucursal = 'HUATULCO' (prestamo ⨝ sucursal)
+
+
+-- EJERCICIO 2. Determinar el nombre de los clientes que viven en OAXACA, que tienen cuenta en el banco
+
+-- Solución 1
+-- π nombrecliente (σ estado = 'OAXACA' cliente ⨝ ctacliente) 
+
+
+-- EJERCICIO 3. Nombre de los clientes del banco que tienen una cuenta con saldo mayor a $50,000, un préstamo con importe entre $60,000 y $90,000 o ambos
+
+-- Observación: En este ejercicio se hace uso de la operación: Unión
+		-- Objetivo: Obtener una tabla que contiene las tuplas de la primera relación además 					de las tuplas de la segunda relación. Los renglones duplicados se eliminan. 
+		-- Condiciones a cumplir: Al adaptar los operadores de conjuntos a las relaciones se 					debe asegurar que exista compatibilidad entre ellas:
+				-- Tienen el mismo grado, los atributos tienen el mismo nombre y el dominio del 							atributo i de R de es el mismo que el atributo i de S, para toda i
+
+-- Las consultas 'r' y 's' se encargan de obtener el atributo 'idcliente', éste garantizará la compatiblidad con la tabla cliente al momento de realizar la unión
+-- r = π idcliente (σ saldo > 50000 cuenta ⨝ ctacliente)
+-- s = π idcliente (σ importe > 60000 ∧ importe < 90000 prestamo ⨝ prestatario) 
+-- La operación (r∪s) ⨝ cliente tiene como atributo compatible 'idcliente', por lo que está bien definida
+-- π nombrecliente ((r∪s) ⨝ cliente)
+
+
+-- EJERCICIO 4. Toda la información de los clientes que tienen abierta una cuenta con saldo entre $60,000 y $80,000, pero no tienen ninguna de crédito.
+
+-- r = π idcliente (σ saldo ≥ 60000 ∧ saldo ≤ 80000 cuenta ⨝ ctacliente) 
+-- s = π idcliente prestatario
+-- (r - s) ⨝ cliente
+
+
+-- EJERCICIO 5. El nombre de los clientes que tienen un préstamo y una cuenta abierta durante el primer semestre de 2013
+
+r = π idcliente (σ fecha ≥ date('2013-01-01') ∧ fecha ≤ date('2013-06-30') cuenta ⨝ ctacliente)
+π nombrecliente ((r ∩ π idcliente prestatario) ⨝ cliente)
