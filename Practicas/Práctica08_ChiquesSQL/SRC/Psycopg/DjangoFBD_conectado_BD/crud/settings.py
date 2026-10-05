@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-nso%l=smyxe!+d#cm-4v#9s1(fhh^ff2$=9d%4nml(62-+qei9"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "clave-de-ejemplo-no-usar-en-produccion")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,7 +80,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
         "USER": "postgres",
-        "PASSWORD": "314297967",
+        "PASSWORD": os.environ.get("DB_PASSWORD", ""),
         "HOST": "localhost",
         "PORT": "5432",
     }
